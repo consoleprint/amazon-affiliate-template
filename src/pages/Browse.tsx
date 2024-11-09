@@ -1,25 +1,59 @@
 import React, { useState } from 'react';
 import { Filter, SlidersHorizontal, ChevronDown } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
+import {products} from '../components/products'
 
 export default function Browse() {
   const [sortBy, setSortBy] = useState('popular');
   const [priceRange, setPriceRange] = useState('all');
   const [rating, setRating] = useState('all');
+  console.log(rating)
+  const filterProducts = () => {
+    let filtered = [...products];
 
-  // Sample products data
-  const products = [
-    {
-      id: 1,
-      title: "Sony WH-1000XM4",
-      description: "Wireless noise-canceling headphones",
-      price: 348,
-      rating: 4.8,
-      image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&w=800&q=80",
-      icon: Filter
-    },
-    // Add more products here...
-  ];
+    // Filter by price range
+    if (priceRange !== 'all') {
+      filtered = filtered.filter(product => {
+        switch(priceRange) {
+          case 'under-50':
+            return product.price < 50;
+          case '50-100':
+            return product.price >= 50 && product.price <= 100;
+          case '100-200':
+            return product.price > 100 && product.price <= 200;
+          case 'over-200':
+            return product.price > 200;
+          default:
+            return true;
+        }
+      });
+    }
+
+    // Filter by rating
+    if (rating !== 'all') {
+      const ratingValue = parseFloat(rating);
+      filtered = filtered.filter(product =>product.rating >= ratingValue);
+    }
+
+    // Sort products
+    switch(sortBy) {
+      case 'price-low':
+        filtered.sort((a, b) => a.price - b.price);
+        break;
+      case 'price-high':
+        filtered.sort((a, b) => b.price - a.price);
+        break;
+      case 'newest':
+        filtered.sort((a, b) => b.id - a.id);
+        break;
+      default: // 'popular'
+        filtered.sort((a, b) => b.rating - a.rating);
+    }
+
+    return filtered;
+  };
+
+  const filteredProducts = filterProducts();
 
   return (
     <div className="bg-white">
@@ -55,17 +89,23 @@ export default function Browse() {
             <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
               <h3 className="font-semibold text-gray-900 mb-4">Price Range</h3>
               <div className="space-y-2">
-                {['All', 'Under $50', '$50 - $100', '$100 - $200', 'Over $200'].map((range) => (
-                  <label key={range} className="flex items-center">
+                {[
+                  { value: 'all', display: 'All' },
+                  { value: 'under-50', display: 'Under $50' },
+                  { value: '50-100', display: '$50 - $100' },
+                  { value: '100-200', display: '$100 - $200' },
+                  { value: 'over-200', display: 'Over $200' }
+                ].map((range) => (
+                  <label key={range.value} className="flex items-center">
                     <input
                       type="radio"
                       name="price"
-                      value={range.toLowerCase().replace(/\s+/g, '-')}
-                      checked={priceRange === range.toLowerCase().replace(/\s+/g, '-')}
+                      value={range.value}
+                      checked={priceRange === range.value}
                       onChange={(e) => setPriceRange(e.target.value)}
                       className="text-blue-600 focus:ring-blue-500"
                     />
-                    <span className="ml-2 text-gray-600">{range}</span>
+                    <span className="ml-2 text-gray-600">{range.display}</span>
                   </label>
                 ))}
               </div>
@@ -74,17 +114,22 @@ export default function Browse() {
             <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
               <h3 className="font-semibold text-gray-900 mb-4">Rating</h3>
               <div className="space-y-2">
-                {['All', '4★ & up', '3★ & up', '2★ & up'].map((ratingOption) => (
-                  <label key={ratingOption} className="flex items-center">
+                {[
+                  { value: 'all', display: 'All' },
+                  { value: '4', display: '4★ & up' },
+                  { value: '3', display: '3★ & up' }, 
+                  { value: '2', display: '2★ & up' }
+                ].map((ratingOption) => (
+                  <label key={ratingOption.value} className="flex items-center">
                     <input
                       type="radio"
                       name="rating"
-                      value={ratingOption.toLowerCase().replace(/\s+/g, '-')}
-                      checked={rating === ratingOption.toLowerCase().replace(/\s+/g, '-')}
+                      value={ratingOption.value}
+                      checked={rating === ratingOption.value}
                       onChange={(e) => setRating(e.target.value)}
                       className="text-blue-600 focus:ring-blue-500"
                     />
-                    <span className="ml-2 text-gray-600">{ratingOption}</span>
+                    <span className="ml-2 text-gray-600">{ratingOption.display}</span>
                   </label>
                 ))}
               </div>
@@ -94,7 +139,7 @@ export default function Browse() {
           {/* Products Grid */}
           <div className="col-span-9">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {products.map((product) => (
+              {filteredProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>

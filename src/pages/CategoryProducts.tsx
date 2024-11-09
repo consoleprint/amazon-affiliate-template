@@ -2,32 +2,10 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import { Laptop, ShoppingBag } from 'lucide-react';
-
+import {products} from '../components/products'
 export default function CategoryProducts() {
   const { category } = useParams();
-
-  // Sample category-specific products
-  const products = [
-    {
-      id: 1,
-      title: "MacBook Pro 14\"",
-      description: "M2 Pro chip, 16GB RAM, 512GB SSD",
-      price: 1999,
-      rating: 4.9,
-      image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80",
-      icon: Laptop
-    },
-    {
-      id: 2,
-      title: "Dell XPS 13",
-      description: "Intel Core i7, 16GB RAM, 1TB SSD",
-      price: 1499,
-      rating: 4.8,
-      image: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=800&q=80",
-      icon: Laptop
-    },
-    // Add more products...
-  ];
+  const filteredProducts = products.filter(product => product.category === category);
 
   const getCategoryName = (slug: string) => {
     return slug.split('-').map(word => 
@@ -48,7 +26,7 @@ export default function CategoryProducts() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
