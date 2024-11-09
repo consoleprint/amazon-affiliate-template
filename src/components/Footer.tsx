@@ -19,7 +19,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li><Link to="/" className="hover:text-white transition-colors">Home</Link></li>
               <li><Link to="/categories" className="hover:text-white transition-colors">Categories</Link></li>
-              <li><Link to="/deals" className="hover:text-white transition-colors">Deals</Link></li>
+              {/* <li><Link to="/deals" className="hover:text-white transition-colors">Deals</Link></li> */}
               <li><Link to="/browse" className="hover:text-white transition-colors">Browse All</Link></li>
               <li><Link to="/about" className="hover:text-white transition-colors">About</Link></li>
             </ul>
@@ -35,7 +35,7 @@ export default function Footer() {
             </ul>
           </div>
           
-          <div>
+          {/* <div>
             <h3 className="text-white text-lg font-semibold mb-4">Connect</h3>
             <div className="flex space-x-4">
               <a href="#" className="hover:text-white transition-colors">
@@ -64,7 +64,7 @@ export default function Footer() {
                 Subscribe
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
         
         <div className="mt-8 pt-8 border-t border-gray-800 text-sm text-center">

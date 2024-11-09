@@ -19,12 +19,12 @@ export default function Header() {
           <div className="hidden md:flex items-center space-x-8">
             <Link to="/" className="text-gray-600 hover:text-gray-900">Home</Link>
             <Link to="/categories" className="text-gray-600 hover:text-gray-900">Categories</Link>
-            <Link to="/deals" className="text-gray-600 hover:text-gray-900">Deals</Link>
+            {/* <Link to="/deals" className="text-gray-600 hover:text-gray-900">Deals</Link> */}
             <Link to="/browse" className="text-gray-600 hover:text-gray-900">Browse All</Link>
             <Link to="/about" className="text-gray-600 hover:text-gray-900">About</Link>
           </div>
 
-          <div className="flex items-center space-x-4">
+          {/* <div className="flex items-center space-x-4">
             <div className="hidden md:flex items-center">
               <input
                 type="text"
@@ -43,7 +43,7 @@ export default function Header() {
                 <Menu className="h-6 w-6 text-gray-600" />
               )}
             </button>
-          </div>
+          </div> */}
         </div>
 
         {/* Mobile Menu */}
