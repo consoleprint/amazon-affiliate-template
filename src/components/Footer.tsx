@@ -35,7 +35,7 @@ export default function Footer() {
             </ul>
           </div>
           
-          {/* <div>
+          <div>
             <h3 className="text-white text-lg font-semibold mb-4">Connect</h3>
             <div className="flex space-x-4">
               <a href="#" className="hover:text-white transition-colors">
@@ -64,7 +64,7 @@ export default function Footer() {
                 Subscribe
               </button>
             </div>
-          </div> */}
+          </div>
         </div>
         
         <div className="mt-8 pt-8 border-t border-gray-800 text-sm text-center">
