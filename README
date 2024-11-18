@@ -1,5 +1,22 @@
-```markdown
-1. Clone the repository:
+# Amazon Associate Template
+
+A ready-to-use template for building Amazon Associate websites with modern web technologies.
+
+## Features
+
+- Built with React
+- Styled-components for styling
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 14.0 or later
+- npm
+
+### Installation
+
+1. Clone the repository:1. Clone the repository:
 
    ```bash
    git clone https://github.com/consoleprint/amazon-associate-template.git
