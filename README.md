@@ -2,6 +2,9 @@
 
 A ready-to-use template for building Amazon Associate websites with modern web technologies.
 
+https://amazon-associate-template.vercel.app for preview.
+
+
 ## Features
 
 - Built with React
